@@ -1,0 +1,201 @@
+var video__pl;
+var ripple_wrap, rippler, finish, monitor;
+var x, y;
+$(document).ready(function($){
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+    ripple_wrap = $('.ripple-wrap');
+    rippler = $('.ripple');
+    finish = false;
+    monitor = function(el) {
+        var computed = window.getComputedStyle(el, null),
+            borderwidth = parseFloat(computed.getPropertyValue('border-left-width'));
+        if (!finish && borderwidth >= 1500) {
+            el.style.WebkitAnimationPlayState = "paused";
+            el.style.animationPlayState = "paused";
+        }
+        if (finish) {
+            el.style.WebkitAnimationPlayState = "running";
+            el.style.animationPlayState = "running";
+            return;
+        } else {
+            window.requestAnimationFrame(function() {monitor(el)});
+        }
+    };
+    rippler.bind("webkitAnimationEnd oAnimationEnd msAnimationEnd mozAnimationEnd animationend", function(e){
+        ripple_wrap.removeClass('goripple');
+    });
+
+    $(document).on('click', '.buy__scroll-btn', function(event){
+        $('html, body').stop().animate({
+            scrollTop : $('.buy').offset().top - 95 +  "px"
+        }, 900, 'easeInOutExpo');
+        event.preventDefault();
+    });
+
+    $(document).on('click', '.play__video-js', function (e) {
+      e.preventDefault();
+      $('.video__wrap').html('<video id="video-pl" class="video-js vim-ss"></video>');
+      video__pl = videojs('video-pl', {
+          controls: true,
+          autoplay: true,
+          mute: true,
+          preload: 'auto',
+          sources: [{
+              src: $(this).data('video'),
+              type: 'video/' + $(this).data('type')
+          }]
+      });
+    });
+
+    $(document).on('click', '.code__open-js', function (e) {
+      e.preventDefault();
+      $(this).closest('.code__form').addClass('active');
+      $('.auth__block, .main__nav').addClass('code__open');
+    });
+
+    $(document).on('click', '.close-code', function (e) {
+      e.preventDefault();
+      $(this).closest('.code__form').removeClass('active');
+        $('.auth__block, .main__nav').removeClass('code__open');
+    });
+
+    $(document).on('click', '.nav__bars', function () {
+        $(this).toggleClass('active');
+        $('.header__right').toggleClass('active');
+    });
+
+    if($('.select__wrap').length){
+        $('.select__wrap select').styler();
+    }
+
+
+  if($(".fancybox").length){
+      $(".fancybox").fancybox({
+          helpers: {
+              overlay: {
+                  locked: false
+              }
+          },
+          openEffect	: 'none',
+          closeEffect	: 'none',
+          padding: 0
+      });
+  }
+
+  $('.modal__open-js').fancybox({
+    autoSize: true,
+    type: 'inline',
+    closeBtn: false,
+    padding: 0,
+    scrolling: 'visible',
+    fixed: false,
+    margin: [25, 0, 25, 0],
+    autoCenter: false,
+    helpers: {
+      overlay: {
+        locked: false
+      }
+    },
+    beforeShow: function() {
+
+    },
+    afterShow: function(){
+      $(".fancybox-skin").addClass('active');
+    },
+    beforeClose: function(){
+      $(".fancybox-skin").removeClass('active');
+    },
+    afterClose: function() {
+
+    }
+  }).click(function() {
+
+    });
+
+
+  $('.modal__close, .close-modal').click(function() {
+    $.fancybox.close();
+    return false;
+  });
+
+  $(document).on('click', '.faq__item-header', function () {
+     var parent = $(this).closest('.faq__item');
+     if(parent.hasClass('active')){
+        parent.find('.faq__item-answer').slideUp();
+        parent.removeClass('active');
+     }else{
+        $('.faq__item-answer').slideUp();
+        $('.faq__item').removeClass('active');
+         parent.find('.faq__item-answer').slideDown();
+         parent.addClass('active');
+     }
+  });
+
+  $(document).on('click', '.faq__close', function () {
+      var parent = $(this).closest('.faq__item');
+      parent.find('.faq__item-answer').slideUp();
+      parent.removeClass('active');
+  });
+
+  $(document).on('click', '.rules__nav-link', function (e) {
+      e.preventDefault();
+      $('.tabs__hidden a[href="' + $(this).attr('href') + '"]').trigger('click');
+  });
+
+});
+
+
+$(document).on('click', '.pjax_link', function (e) {
+    x = e.clientX;
+    y = e.clientY;
+});
+
+
+$(document).on('pjax:start', function(){
+    rippler.css('left', x + 'px');
+    rippler.css('top', y + 'px');
+    finish = false;
+    ripple_wrap.addClass('goripple');
+    window.requestAnimationFrame(function() {monitor(rippler[0])});
+});
+
+
+
+/*
+$(document).on('pjax:success', function(){
+    $('html,body').scrollTop(0);
+    $.pjax.defaults = true;
+});
+*/
+
+$(document).on('pjax:complete', function(){
+    //$('.ripple-wrap').removeClass('goripple');
+    setTimeout(function() {
+        finish = true;
+    },50);
+});
+
+$(window).load(function () {
+    if (location.hash) {
+        setTimeout(function() {
+            window.scrollTo(0, 0);
+        }, 1);
+    }
+});
+
+$(window).on('scroll pjax:success', function(){
+    var y = $(window).scrollTop();
+    if(y > 700){
+        $('.header__fixed').addClass('active');
+    }else{
+        $('.header__fixed').removeClass('active');
+    }
+
+    if(y > 0){
+        $('.header').addClass('active');
+    }else{
+        $('.header').removeClass('active');
+    }
+});

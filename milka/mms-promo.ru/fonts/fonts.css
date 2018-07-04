@@ -1,0 +1,60 @@
+@font-face {
+    font-family: 'Helios Cond';
+    src: url('HeliosCond-Bold.eot');
+    src: url('HeliosCond-Bold.eot@') format('embedded-opentype'),
+    url('HeliosCond-Bold.woff2.html') format('woff2'),
+    url('HeliosCond-Bold.woff') format('woff'),
+    url('HeliosCond-Bold.ttf.html') format('truetype'),
+    url('HeliosCond-Bold.svg') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Helios Cond';
+    src: url('HeliosCond.eot');
+    src: url('HeliosCond.eot@') format('embedded-opentype'),
+    url('HeliosCond.woff2.html') format('woff2'),
+    url('HeliosCond.woff') format('woff'),
+    url('HeliosCond.ttf.html') format('truetype'),
+    url('HeliosCond.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Helios Cond';
+    src: url('HeliosCondBlackC.eot');
+    src: url('HeliosCondBlackC.eot@') format('embedded-opentype'),
+    url('HeliosCondBlackC.woff2.html') format('woff2'),
+    url('HeliosCondBlackC.woff') format('woff'),
+    url('HeliosCondBlackC.ttf.html') format('truetype'),
+    url('HeliosCondBlackC.svg') format('svg');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('radomir_tinkov_-_gilroy-light-webfont.eot');
+    src: url('radomir_tinkov_-_gilroy-light-webfont.eot@') format('embedded-opentype'),
+    url('radomir_tinkov_-_gilroy-light-webfont.woff2.html') format('woff2'),
+    url('radomir_tinkov_-_gilroy-light-webfont.woff') format('woff'),
+    url('radomir_tinkov_-_gilroy-light-webfont.ttf.html') format('truetype'),
+    url('radomir_tinkov_-_gilroy-light-webfont.svg') format('svg');
+    font-weight: 300;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('Gilroy-ExtraBold.eot');
+    src: url('Gilroy-ExtraBold.eot@') format('embedded-opentype'),
+    url('Gilroy-ExtraBold.woff2.html') format('woff2'),
+    url('Gilroy-ExtraBold.woff') format('woff'),
+    url('Gilroy-ExtraBold.ttf.html') format('truetype'),
+    url('Gilroy-ExtraBold.svg') format('svg');
+    font-weight: 800;
+    font-style: normal;
+}
